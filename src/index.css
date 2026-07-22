@@ -1,5 +1,5 @@
 :root {
-  --bg: #F1EADA;
+  --bg: #e9d6a856;
   --bg-elevated: #dfe6f0;
   --border: #000000;
   --text: #060707;
@@ -313,6 +313,12 @@ background: var(--border);
 .footer-links {
   display: flex;
   gap: 16px;
+}
+
+.footer-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .footer-link {
