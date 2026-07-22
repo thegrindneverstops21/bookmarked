@@ -1,4 +1,4 @@
-import BookmarkCard, { Bookmark } from "./BookmarkCard";
+import BookmarkCard, { type Bookmark } from "./BookmarkCard";
 
 interface BookmarkGridProps {
   bookmarks: Bookmark[];

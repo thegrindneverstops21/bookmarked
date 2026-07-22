@@ -92,19 +92,72 @@ body {
   color: var(--text-muted);
 }
 
+.navbar-search-input:focus {
+  border-color: var(--accent);
+}
+
 .navbar-action {
-
-
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .navbar-icon-btn {
+  position: relative;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+}
 
+.navbar-icon-btn:hover {
+  color: var(--text);
 }
 
 .navbar-dot {
-
+  position: absolute;
+  top: -2%;
+  right: -2%;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 .navbar-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
 
+.navbar-avatar {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.navbar-avatar-fallback {
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-username {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.navbar-chevron {
+  color: var(--text-muted);
 }

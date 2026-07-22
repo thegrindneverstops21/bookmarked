@@ -33,10 +33,10 @@ export default function BookmarkCard({ bookmark, onToggleFavorite }: BookmarkCar
         </button>
       </div>
 
-      <h3 className="card__title">{title}</h3>
-      <span className="card__category">{category}</span>
+      <h3 className="card-title">{title}</h3>
+      <span className="card-category">{category}</span>
 
-      <a href={url} target="_blank" rel="noreferrer" className="card__link">
+      <a href={url} target="_blank" rel="noreferrer" className="card-link">
         Visit <ExternalLink size={12} />
       </a>
     </div>
