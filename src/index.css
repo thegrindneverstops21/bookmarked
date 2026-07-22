@@ -330,3 +330,21 @@ background: var(--border);
 .footer-link:hover {
   color: var(--text);
 }
+
+
+/* Layout */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-body {
+  display: flex;
+  flex: 1;
+}
+
+.layout-content {
+  flex: 1;
+  min-width: 0;
+}
