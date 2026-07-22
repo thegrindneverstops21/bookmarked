@@ -161,3 +161,139 @@ body {
 .navbar-chevron {
   color: var(--text-muted);
 }
+
+/* Sidebar Styling */
+.sidebar {
+  width: 220px;
+  min-height: calc(100vh - 64 px);
+  background-color: var(--bg);
+  border-right: apx solid var(--border);
+  padding: 24px 12px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-item:hover {
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+
+.sidebar-item-active {
+  background: var(--text-muted);
+  color: white;
+}
+
+.sidebar-icon {
+  flex-shrink: 0;
+}
+
+
+/* Bookmark Grid Styling */
+.grid-empty {
+  padding: 24px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.bookmark-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 24px;
+}
+
+
+/* Bookmark Card styling */
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-favicon {
+  height: 20px;
+  width: 20px;
+  border-radius: 4px;
+}
+
+.card-favicon-fallback {
+background: var(--border);
+}
+
+.card-fav-btn  {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+}
+
+.card-fav-btn-active {
+  color: #fbbf24;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-category {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.card-link {
+  margin-top: auto;
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-link:hover {
+  color: var(--accent-hover);
+}
