@@ -1,12 +1,10 @@
-import { Search, Bell, ChevronDown } from 'lucide-react'
+import { Search, BookmarkPlus } from 'lucide-react'
 
 interface NavbarProps {
-    username: string;
-    avatar?: string;
     onSearch?: (query: string) => void;
 }
 
-export default function Navbar({ username, avatar, onSearch }: NavbarProps) {
+export default function Navbar({onSearch }: NavbarProps) {
     return (
         <header className="navbar">
             <div className="navbar-brand">
@@ -19,23 +17,12 @@ export default function Navbar({ username, avatar, onSearch }: NavbarProps) {
                 <Search className='navbar-search-icon' size={16} />
                 <input type='text' placeholder='search by title, tag, url, or description' onChange={(e) => onSearch?.(e.target.value)} className='navbar-search-input' />
             </div>
-            {/*Icon & Profile*/}
-            <div className='navbar-action'>
-                <button className='navbar-icon-btn'>
-                    <Bell size={20} />
-                    <span className='navbar-dot' />
-                </button>
 
-                <button className='navbar-profile'>
-                    {avatar ? (
-                        <img src= {avatar} alt={username} className='navbar-avatar' />
-                    ): (
-                        <div className='navbar-avatar-fallback'>
-                            {username.charAt(0).toUpperCase()}
-                        </div> 
-                    )}
-                    <span className='navbar-username'>{username}</span>
-                    <ChevronDown size={16} className='navbar-chevron' />
+            {/* Add link button */}
+
+            <div className="navbar-btn-link">
+                <button className="navbar-btn">
+                    <BookmarkPlus size={30} className="navbar-add-btn"/>
                 </button>
             </div>
         </header>

@@ -1,14 +1,14 @@
 :root {
-  --bg: #e9d6a856;
-  --bg-elevated: #dfe6f0;
-  --border: #000000;
-  --text: #060707;
-  --text-muted: #94a3b8;
-  --accent: #6366f1;
-  --accent-hover: #4f46e5;
+  --bg: #CED4DA;
+  --bg-elevated: #F8F9FA;
+  --border: #FEFAE0;
+  --text: #212529;
+  --text-muted: #343A40;
+  --accent: #495057;
+  --accent-hover: #ADB5BD;
   --radius-sm: 6px;
   --radius-md: 10px;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "DynaPuff";
 }
 
 * {
@@ -47,7 +47,7 @@ body {
   width: 32px;
   border-radius: var(--radius-sm);
   background: var(--accent);
-  color: rgb(0, 0, 0);
+  color: rgb(151, 112, 112);
   font-weight: 700;
   font-size: 14px;
   display: flex;
@@ -59,6 +59,8 @@ body {
   font-weight: 600;
   font-size: 18px;
   letter-spacing: -0.01em;
+  font-family: var(--font-sans);
+  
 }
 
 .navbar-search {
@@ -83,9 +85,10 @@ body {
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   padding: 8px 12px 8px 36px;
-  font-size: 14px;
+  font-size: 12px;
   outline: none;
   transition: border-color 0.15s ease;
+  font-family: var(--font-sans);
 }
 
 .navbar-search-input::placeholder {
@@ -96,72 +99,23 @@ body {
   border-color: var(--accent);
 }
 
-.navbar-action {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.navbar-btn-link {
+
 }
 
-.navbar-icon-btn {
-  position: relative;
+.navbar-add-btn {
+
+}
+
+.navbar-btn {
   background: none;
   border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  display: flex;
-  padding: 0;
 }
 
-.navbar-icon-btn:hover {
-  color: var(--text);
+.navbar-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-hover);
 }
-
-.navbar-dot {
-  position: absolute;
-  top: -2%;
-  right: -2%;
-  height: 8px;
-  width: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.navbar-profile {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.navbar-avatar {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid var(--border);
-}
-
-.navbar-avatar-fallback {
-  background: var(--bg-elevated);
-  color: var(--text);
-  font-size: 12px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.navbar-username {
-  font-size: 14px;
-  color: var(--text);
-}
-
-.navbar-chevron {
-  color: var(--text-muted);
-}
-
 /* Sidebar Styling */
 .sidebar {
   width: 220px;
