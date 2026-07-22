@@ -32,7 +32,7 @@ export default function Navbar({ username, avatar, onSearch }: NavbarProps) {
                     ): (
                         <div className='navbar-avatar-fallback'>
                             {username.charAt(0).toUpperCase()}
-                        </div>
+                        </div> 
                     )}
                     <span className='navbar-username'>{username}</span>
                     <ChevronDown size={16} className='navbar-chevron' />
