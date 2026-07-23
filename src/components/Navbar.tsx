@@ -23,6 +23,7 @@ export default function Navbar({onSearch }: NavbarProps) {
             <div className="navbar-btn-link">
                 <button className="navbar-btn">
                     <BookmarkPlus size={30} className="navbar-add-btn"/>
+                    Add Bookmark
                 </button>
             </div>
         </header>

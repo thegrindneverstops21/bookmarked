@@ -5,7 +5,6 @@ import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 
 interface LayoutProp {
-    username: string;
     activeView: SidebarView;
     onNavigate: (view: SidebarView) => void;
     onSearch?: (query: string) => void;
@@ -13,7 +12,6 @@ interface LayoutProp {
 }
 
 export default function Layout({
-    username,
     activeView,
     onNavigate,
     onSearch,
@@ -21,7 +19,7 @@ export default function Layout({
 }: LayoutProp) {
     return(
         <div className="layout">
-            <Navbar username={username} onSearch={onSearch} />
+            <Navbar onSearch={onSearch} />
 
             <div className="layout-body">
                 <Sidebar activeView={activeView} onNavigate={onNavigate} />

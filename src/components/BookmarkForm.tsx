@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bookmark } from "./BookmarkCard";
+import type { Bookmark } from "./BookmarkCard";
 
 interface BookmarkFormProps {
   onAdd: (bookmark: Bookmark) => void;
@@ -40,14 +40,14 @@ export default function BookmarkForm({ onAdd }: BookmarkFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="add-form">
-      <h3 className="add-form__heading">Add Bookmark</h3>
+      <h3 className="add-form-heading">Add Bookmark</h3>
 
       <input
         type="text"
         placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="add-form__input"
+        className="add-form-input"
         required
       />
       <input
@@ -55,7 +55,7 @@ export default function BookmarkForm({ onAdd }: BookmarkFormProps) {
         placeholder="https://example.com"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
-        className="add-form__input"
+        className="add-form-input"
         required
       />
       <input
@@ -63,13 +63,13 @@ export default function BookmarkForm({ onAdd }: BookmarkFormProps) {
         placeholder="Category (optional)"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="add-form__input"
+        className="add-form-input"
       />
       <textarea
         placeholder="Description (optional)"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        className="add-form__input add-form__textarea"
+        className="add-form-input add-form-textarea"
         rows={2}
       />
       <input
@@ -77,10 +77,10 @@ export default function BookmarkForm({ onAdd }: BookmarkFormProps) {
         placeholder="Tags, comma separated (optional)"
         value={tagsInput}
         onChange={(e) => setTagsInput(e.target.value)}
-        className="add-form__input"
+        className="add-form-input"
       />
 
-      <button type="submit" className="add-form__submit">
+      <button type="submit" className="add-form-submit">
         Save Bookmark
       </button>
     </form>

@@ -14,43 +14,46 @@ export interface Bookmark {
 interface BookmarkCardProps {
   bookmark: Bookmark;
   onToggleFavorite: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
-export default function BookmarkCard({ bookmark, onToggleFavorite }: BookmarkCardProps) {
+export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete }: BookmarkCardProps) {
   const { id, title, url, category, description, tags, favicon, isFavorite } = bookmark;
 
   return (
     <div className="card">
-      <div className="card__header">
+      <div className="card-header">
         {favicon ? (
-          <img src={favicon} alt="" className="card__favicon" />
+          <img src={favicon} alt="" className="card-favicon" />
         ) : (
-          <div className="card__favicon card__favicon--fallback" />
+          <div className="card-favicon card-favicon-fallback" />
         )}
         <button
           onClick={() => onToggleFavorite(id)}
-          className={`card__fav-btn ${isFavorite ? "card__fav-btn--active" : ""}`}
+          className={`card-fav-btn ${isFavorite ? "card-fav-btn-active" : ""}`}
         >
           <Star size={16} fill={isFavorite ? "currentColor" : "none"} />
         </button>
       </div>
+      <h3 className="card-title">{title}</h3>
+      <span className="card-category">{category}</span>
 
-      <h3 className="card__title">{title}</h3>
-      <span className="card__category">{category}</span>
-
-      {description && <p className="card__description">{description}</p>}
+      {description && <p className="card-description">{description}</p>}
 
       {tags.length > 0 && (
-        <div className="card__tags">
+        <div className="card-tags">
           {tags.map((tag) => (
-            <span key={tag} className="card__tag">{tag}</span>
+            <span key={tag} className="card-tag">{tag}</span>
           ))}
         </div>
       )}
 
-      <a href={url} target="_blank" rel="noreferrer" className="card__link">
+      <a href={url} target="_blank" rel="noreferrer" className="card-link">
         Visit <ExternalLink size={12} />
       </a>
+      <button onClick={() => onDelete(id)} className="delete-btn" aria-label={`Delete ${title}`}>
+        Delete
+      </button>
     </div>
   );
 }

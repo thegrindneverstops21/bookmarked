@@ -104,7 +104,7 @@ body {
 }
 
 .navbar-add-btn {
-
+  
 }
 
 .navbar-btn {
@@ -116,6 +116,8 @@ body {
   border-color: var(--accent);
   color: var(--accent-hover);
 }
+
+
 /* Sidebar Styling */
 .sidebar {
   width: 220px;
