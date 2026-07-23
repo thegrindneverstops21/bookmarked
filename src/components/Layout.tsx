@@ -8,6 +8,7 @@ interface LayoutProp {
     activeView: SidebarView;
     onNavigate: (view: SidebarView) => void;
     onSearch?: (query: string) => void;
+    onAddClick?: () => void;
     children: ReactNode;
 }
 
@@ -15,11 +16,12 @@ export default function Layout({
     activeView,
     onNavigate,
     onSearch,
+    onAddClick,
     children,
 }: LayoutProp) {
     return(
         <div className="layout">
-            <Navbar onSearch={onSearch} />
+            <Navbar onSearch={onSearch} onAddClick={onAddClick}/>
 
             <div className="layout-body">
                 <Sidebar activeView={activeView} onNavigate={onNavigate} />

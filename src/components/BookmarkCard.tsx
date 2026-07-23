@@ -10,14 +10,15 @@ export interface Bookmark {
   favicon?: string;
   isFavorite: boolean;
 }
-
+/*Check user action */
 interface BookmarkCardProps {
   bookmark: Bookmark;
   onToggleFavorite: (id: string) => void;
   onDelete: (id: string) => void;
+  onEdit: (id: string) => void;
 }
 
-export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete }: BookmarkCardProps) {
+export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete, onEdit }: BookmarkCardProps) {
   const { id, title, url, category, description, tags, favicon, isFavorite } = bookmark;
 
   return (
@@ -51,6 +52,9 @@ export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete }: B
       <a href={url} target="_blank" rel="noreferrer" className="card-link">
         Visit <ExternalLink size={12} />
       </a>
+       <button onClick={() => onEdit(id)} className="edit-btn" aria-label={`Edit ${title}`}>
+        Edit
+      </button>
       <button onClick={() => onDelete(id)} className="delete-btn" aria-label={`Delete ${title}`}>
         Delete
       </button>

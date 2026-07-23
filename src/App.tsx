@@ -57,6 +57,23 @@ export default function App() {
     );
   };
 
+  const handleEditBookmark = (updatedBookmark: Bookmark) => {
+    setBookmarks((prev) =>
+      prev.map((bookmark) =>
+        bookmark.id === updatedBookmark.id ? updatedBookmark : bookmark
+      )
+    );
+  };
+
+  // wrapper to accept either an updated Bookmark or an id (some components may call onEdit with id)
+  const handleEdit = (payload: string | Bookmark) => {
+    if (typeof payload === "string") {
+      // if only id provided, no updated data to apply — noop or could open edit UI
+      return;
+    }
+    handleEditBookmark(payload);
+  };
+
   const handleAddBookmark = (bookmark: Bookmark) => {
     setBookmarks((prev) => [...prev, bookmark]);
     setShowAddForm(false);
@@ -66,6 +83,15 @@ export default function App() {
     setCategoryFilter(null);
     setShowAddForm(false);
     setActiveView(view);
+  };
+
+  const handleAddClick = () => {
+    // if we're on categories/settings, jump to bookmarks so the form is visible
+    if (!showGrid) {
+      setCategoryFilter(null);
+      setActiveView("bookmarks");
+    }
+    setShowAddForm((v) => !v);
   };
 
   // Delete function
@@ -102,6 +128,7 @@ const bySearch = bookmarks.filter((b) => {
       activeView={activeView}
       onNavigate={handleNavigate}
       onSearch={setSearchQuery}
+      onAddClick={handleAddClick}
     >
       {showGrid && (
         <>
@@ -116,7 +143,7 @@ const bySearch = bookmarks.filter((b) => {
 
           {showAddForm && <BookmarkForm onAdd={handleAddBookmark} />}
 
-          <BookmarkGrid bookmarks={visible} onToggleFavorite={handleToggleFavorite} onDelete={handleDelete} />
+          <BookmarkGrid bookmarks={visible} onToggleFavorite={handleToggleFavorite} onEdit={handleEdit} onDelete={handleDelete} />
         </>
       )}
 

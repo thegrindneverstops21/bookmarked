@@ -2,9 +2,10 @@ import { Search, BookmarkPlus } from 'lucide-react'
 
 interface NavbarProps {
     onSearch?: (query: string) => void;
+    onAddClick?: () => void;
 }
 
-export default function Navbar({onSearch }: NavbarProps) {
+export default function Navbar({onSearch, onAddClick }: NavbarProps) {
     return (
         <header className="navbar">
             <div className="navbar-brand">
@@ -21,7 +22,7 @@ export default function Navbar({onSearch }: NavbarProps) {
             {/* Add link button */}
 
             <div className="navbar-btn-link">
-                <button className="navbar-btn">
+                <button className="navbar-btn" onClick={onAddClick}>
                     <BookmarkPlus size={30} className="navbar-add-btn"/>
                     Add Bookmark
                 </button>
