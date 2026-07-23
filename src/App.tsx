@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus } from "lucide-react";
+import { BookmarkPlus } from "lucide-react";
 import Layout from "./components/Layout";
 import BookmarkGrid from "./components/BookmarkGrid";
 import BookmarkForm from "./components/BookmarkForm";
@@ -137,7 +137,7 @@ const bySearch = bookmarks.filter((b) => {
               {categoryFilter ? categoryFilter : activeView === "favorites" ? "Favorites" : "Dashboard"}
             </h2>
             <button className="view-header-add-btn" onClick={() => setShowAddForm((v) => !v)}>
-              <Plus size={16} /> Add Bookmark
+              <BookmarkPlus size={16} /> Add Bookmark
             </button>
           </div>
 
