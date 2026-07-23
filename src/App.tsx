@@ -136,9 +136,6 @@ const bySearch = bookmarks.filter((b) => {
             <h2 className="view-header-title">
               {categoryFilter ? categoryFilter : activeView === "favorites" ? "Favorites" : "Dashboard"}
             </h2>
-            <button className="view-header-add-btn" onClick={() => setShowAddForm((v) => !v)}>
-              <BookmarkPlus size={16} /> Add Bookmark
-            </button>
           </div>
 
           {showAddForm && <BookmarkForm onAdd={handleAddBookmark} />}

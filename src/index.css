@@ -382,12 +382,14 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  font-family: var(--font-sans);
 }
 
 .footer-link {
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.15s ease;
+  font-family: var(--font-sans);
 }
 
 .footer-link:hover {
