@@ -129,10 +129,10 @@ body {
 /* Sidebar Styling */
 .sidebar {
   width: 220px;
-  min-height: calc(100vh - 64px);
   background-color: var(--bg);
   border-right: 1px solid var(--border);
   padding: 24px 12px;
+  overflow-y: auto;
 }
 
 .sidebar-nav {
@@ -198,14 +198,33 @@ body {
   width: 100%;
   min-height: 300px;
   margin: 0 auto;
+  gap: 16px;
+}
+
+.empty-state-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  cursor: pointer;
+}
+
+.empty-state-btn:hover {
+  background: var(--accent-hover);
 }
 
 .empty-state {
-    height: 80px;
+  height: auto;
   width: 300px;
   margin: 0;
   opacity: 0.8;
-  min-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -308,8 +327,14 @@ body {
   border-radius: 999px;
 }
 
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .delete-btn {
-  align-self: flex-start;
   background: none;
   border: none;
   color: #dc2626;
@@ -324,6 +349,17 @@ body {
 }
 
 .edit-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 12px;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.edit-btn:hover {
+  text-decoration: underline;
 }
 
 /* Footer */
@@ -423,20 +459,28 @@ body {
 }
 
 /* Layout */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
 .layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .layout-body {
   display: flex;
   flex: 1;
+  min-height: 0; /* required so the child below can scroll instead of growing the page */
 }
 
 .layout-content {
   flex: 1;
   min-width: 0;
+  overflow-y: auto; /* only this area scrolls now — navbar, sidebar, footer stay put */
 }
 
 /* Form */
@@ -539,4 +583,124 @@ body {
   --border: #dee2e6;
   --text: #212529;
   --text-muted: #6c757d;
+}
+
+/* ===================================================== */
+/* Responsive                                             */
+/* ===================================================== */
+
+/* Tablet: sidebar shrinks to icon-only rail */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 72px;
+    padding: 24px 8px;
+  }
+
+  .sidebar-item {
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .sidebar-item span {
+    display: none; /* keep icon, hide label */
+  }
+
+  .navbar-search {
+    max-width: 220px;
+    margin: 0 16px;
+  }
+}
+
+/* Mobile: sidebar becomes a horizontal tab strip instead of a side column */
+@media (max-width: 768px) {
+  .layout-body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 8px 12px;
+    overflow-x: auto;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 4px;
+  }
+
+  .sidebar-item {
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .sidebar-item span {
+    display: inline; /* labels come back, stacked under the icon */
+  }
+
+  .navbar {
+    padding: 0 12px;
+  }
+
+  .navbar-search {
+    max-width: none;
+    flex: 1;
+    margin: 0 12px;
+  }
+
+  .navbar-title {
+    display: none; /* logo mark alone is enough at this width */
+  }
+
+  .navbar-btn span {
+    display: none; /* icon-only add button */
+  }
+
+  .navbar-btn {
+    padding: 8px;
+  }
+
+  .view-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .bookmark-grid {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 16px;
+    text-align: center;
+  }
+}
+
+/* Small phones: trim padding further, stack view header */
+@media (max-width: 420px) {
+  .navbar {
+    height: 56px;
+  }
+
+  .navbar-search-input {
+    font-size: 13px;
+  }
+
+  .view-header-title {
+    font-size: 18px;
+  }
+
+  .add-form,
+  .settings,
+  .categories {
+    padding: 16px;
+  }
 }
