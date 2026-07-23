@@ -52,12 +52,14 @@ export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete, onE
       <a href={url} target="_blank" rel="noreferrer" className="card-link">
         Visit <ExternalLink size={12} />
       </a>
-       <button onClick={() => onEdit(id)} className="edit-btn" aria-label={`Edit ${title}`}>
-        Edit
-      </button>
-      <button onClick={() => onDelete(id)} className="delete-btn" aria-label={`Delete ${title}`}>
-        Delete
-      </button>
+      <div className="card-actions">
+        <button onClick={() => onEdit(id)} className="edit-btn" aria-label={`Edit ${title}`}>
+          Edit
+        </button>
+        <button onClick={() => onDelete(id)} className="delete-btn" aria-label={`Delete ${title}`}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
