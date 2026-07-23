@@ -1,4 +1,4 @@
-import { Sun } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 
 export type Theme = "dark" | "light";
 
@@ -10,11 +10,14 @@ interface SettingsProps {
 export default function Settings({ theme, onThemeChange }: SettingsProps) {
     return (
         <div className="settings">
-            <h3 className="settings-headind">Settings</h3>
+            <h3 className="settings-heading">Settings</h3>
             <div className="settings-row">
                 <span>Theme</span>
                 <div className="settings-toogle">
                     <button onClick={() => onThemeChange("dark")} className={`settings-toogle-btn ${theme === "dark" ? "settings-toogle-btn-active" : ""}`}>
+                        <Moon size={14} /> Dark
+                    </button>
+                    <button onClick={() => onThemeChange("light")} className={`settings-toogle-btn ${theme === "light" ? "settings-toogle-btn-active" : ""}`}>
                         <Sun size={14} /> Light
                     </button>
                 </div>
