@@ -1,41 +1,88 @@
 import { useState } from "react";
-import type { Bookmark } from "./BookmarkCard";
+import { Bookmark } from "./BookmarkCard";
 
 interface BookmarkFormProps {
-    onAdd: (bookmark: Bookmark) => void
+  onAdd: (bookmark: Bookmark) => void;
 }
 
 export default function BookmarkForm({ onAdd }: BookmarkFormProps) {
-    const [title, setTitle] = useState("");
-    const [url, setUrl] = useState("");
-    const [category, setCategory] = useState("");
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [tagsInput, setTagsInput] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!title.trim() || !url.trim()) return;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title.trim() || !url.trim()) return;
 
-        onAdd({
-            id: crypto.randomUUID(),
-            title: title.trim(),
-            url: url.trim(),
-            category: category.trim() || "Uncategorized",
-            isFavorite: false
-        });
+    const tags = tagsInput
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
 
-        setTitle("");
-        setUrl("");
-        setCategory("");
-    };
+    onAdd({
+      id: crypto.randomUUID(),
+      title: title.trim(),
+      url: url.trim(),
+      category: category.trim() || "Uncategorized",
+      description: description.trim() || undefined,
+      tags,
+      isFavorite: false,
+    });
 
-    return (
-        <form onSubmit={handleSubmit} className="form">
-            <h3 className="form-heading">Add Bookmark</h3>
+    setTitle("");
+    setUrl("");
+    setCategory("");
+    setDescription("");
+    setTagsInput("");
+  };
 
-            <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} className="form-input" required />
-            <input type="url" placeholder="https://example.com" value={url} onChange={(e) => setUrl(e.target.value)} className="form-input" required />
-            <input type="text" placeholder="Category(Optional)" value={category} onChange={(e) => setCategory(e.target.value)} className="form-input" />
+  return (
+    <form onSubmit={handleSubmit} className="add-form">
+      <h3 className="add-form__heading">Add Bookmark</h3>
 
-            <button type="submit" className="form-button">Save Bookmark</button>
-        </form>
-    );
+      <input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="add-form__input"
+        required
+      />
+      <input
+        type="url"
+        placeholder="https://example.com"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        className="add-form__input"
+        required
+      />
+      <input
+        type="text"
+        placeholder="Category (optional)"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        className="add-form__input"
+      />
+      <textarea
+        placeholder="Description (optional)"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className="add-form__input add-form__textarea"
+        rows={2}
+      />
+      <input
+        type="text"
+        placeholder="Tags, comma separated (optional)"
+        value={tagsInput}
+        onChange={(e) => setTagsInput(e.target.value)}
+        className="add-form__input"
+      />
+
+      <button type="submit" className="add-form__submit">
+        Save Bookmark
+      </button>
+    </form>
+  );
 }
