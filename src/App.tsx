@@ -75,9 +75,18 @@ export default function App() {
     );
   };
 
-  const bySearch = bookmarks.filter((b) =>
-    b.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const query = searchQuery.trim().toLowerCase();
+
+const bySearch = bookmarks.filter((b) => {
+  if (!query) return true;
+  return (
+    b.title.toLowerCase().includes(query) ||
+    b.url.toLowerCase().includes(query) ||
+    b.category.toLowerCase().includes(query) ||
+    (b.description?.toLowerCase().includes(query) ?? false) ||
+    b.tags.some((tag) => tag.toLowerCase().includes(query))
   );
+});
 
   const visible =
     activeView === "favorites"
