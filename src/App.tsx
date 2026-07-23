@@ -143,7 +143,13 @@ const bySearch = bookmarks.filter((b) => {
 
           {showAddForm && <BookmarkForm onAdd={handleAddBookmark} />}
 
-          <BookmarkGrid bookmarks={visible} onToggleFavorite={handleToggleFavorite} onEdit={handleEdit} onDelete={handleDelete} />
+          <BookmarkGrid
+            bookmarks={visible}
+            onToggleFavorite={handleToggleFavorite}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onAddClick={() => setShowAddForm(true)}
+          />
         </>
       )}
 
