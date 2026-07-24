@@ -21,7 +21,6 @@ body {
   color: var(--text);
 }
 
-
 /* Sidebar Styling */
 .sidebar {
   width: 220px;
@@ -35,6 +34,7 @@ body {
   align-items: center;
   gap: 8px;
   font-family: var(--font-sans);
+  padding: 10px;
 }
 
 .sidebar-logo {
@@ -48,7 +48,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px;
 }
+
 .sidebar-nav {
   display: flex;
   flex-direction: column;
@@ -113,6 +115,7 @@ body {
   min-height: 300px;
   margin: 0 auto;
   gap: 16px;
+  flex: 1;
 }
 
 .empty-state-btn {
@@ -395,6 +398,10 @@ body {
   padding: 24px;
   max-width: 320px;
 }
+.category-heading {
+  font-family: var(--font-sans);
+  margin: 0 0 16px;
+}
 
 .categories-item {
   display: flex;
@@ -445,20 +452,25 @@ body,
   flex: 1;
   min-width: 0;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Form */
 .add-form {
   max-width: 360px;
-  padding: 24px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-form-heading {
   margin: 0 0 4px;
   font-size: 16px;
+  font-family: var(--font-sans);
 }
 
 .add-form-input {
@@ -523,6 +535,99 @@ body,
   border-color: var(--text-muted);
 }
 
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+}
+
+.modal-content {
+  position: relative;
+  background: var(--accent);
+  border-radius: var(--radius-md);
+  max-width: 420px;
+  width: 100%;
+  max-height: 90vh;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+}
+
+.modal-close:hover {
+  color: var(--accent-hover);
+}
+
+/* Delete Confirmation */
+.confirm-dialog {
+  padding: 24px;
+}
+
+.confirrm-dialog-heading {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-family: var(--font-sans);
+}
+
+.confirm-dialog-text {
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.confirm-dialog-cancel {
+  flex: 1;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 10px;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+}
+
+.confirm-dialog-cancel:hover {
+  background: var(--accent-hover);
+}
+
+.confirm-dialog-delete {
+  flex: 1;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+}
+
+.confirm-dialog-delete:hover {
+  background: #b91c1c;
+}
+
 /* Settings */
 .settings {
   padding: 24px;
@@ -530,8 +635,12 @@ body,
 
 .settings-heading {
   margin: 0 0 16px;
+  font-family: var(--font-sans);
 }
 
+.setting-title {
+  font-family: var(--font-sans);
+}
 .settings-row {
   display: flex;
   align-items: center;

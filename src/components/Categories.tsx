@@ -19,6 +19,7 @@ export default function Categories({ bookmarks, onSelectCategory, onAddClick }: 
     if (categories.length === 0) {
         return (
             <div className="empty-grid-state">
+                <h3 className="category-heading">Categories</h3>
                 <img src={ImageIllustration} alt="No categories yet" className="grid-state" />
                 <button className="empty-state-btn" onClick={onAddClick}>
                     <BookmarkPlus size={16} /> Add your first bookmark

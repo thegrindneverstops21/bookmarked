@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { BookmarkPlus, Search } from "lucide-react";
 import Layout from "./components/Layout";
+import Modal from "./components/Modal";
 import BookmarkGrid from "./components/BookmarkGrid";
 import BookmarkForm from "./components/BookmarkForm";
 import Settings, { type Theme } from "./components/Settings";
@@ -59,7 +60,7 @@ export default function App() {
   };
 
   // handles both add and edit: if the bookmark's id already exists, update it in place;
-  // otherwise append it as new. BookmarkForm always calls this same function.
+  // otherwise add it as new.
   const handleSaveBookmark = (bookmark: Bookmark) => {
     setBookmarks((prev) => {
       const exists = prev.some((b) => b.id === bookmark.id);
@@ -150,17 +151,20 @@ export default function App() {
               <input type='text' placeholder='search by title, tag, url, or description' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className='search-input' />
             </div>
             <button className="header-btn" onClick={handleOpenAddForm}>
-              <BookmarkPlus size={16}  />
+              <BookmarkPlus size={16} />
               Add Bookmark
             </button>
           </div>
 
           {showAddForm && (
-            <BookmarkForm
-              onSave={handleSaveBookmark}
-              onCancel={handleCancelForm}
-              editingBookmark={editingBookmark}
-            />
+            <Modal onClose={handleCancelForm}>
+              <BookmarkForm
+                onSave={handleSaveBookmark}
+                onCancel={handleCancelForm}
+                editingBookmark={editingBookmark}
+              />
+            </Modal>
+
           )}
 
           <BookmarkGrid
