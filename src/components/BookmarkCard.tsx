@@ -15,11 +15,18 @@ interface BookmarkCardProps {
   bookmark: Bookmark;
   onToggleFavorite: (id: string) => void;
   onDelete: (id: string) => void;
-  onEdit: (id: string) => void;
+  onEdit: (bookmark: Bookmark) => void;
 }
 
 export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete, onEdit }: BookmarkCardProps) {
   const { id, title, url, category, description, tags, favicon, isFavorite } = bookmark;
+
+  const handleDeleteClick = () => {
+    const confirmed = window.confirm(`Delete "${title}"? This can't be undone.`);
+    if (confirmed) {
+      onDelete(id);
+    }
+  };
 
   return (
     <div className="card">
@@ -53,10 +60,10 @@ export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete, onE
         Visit <ExternalLink size={12} />
       </a>
       <div className="card-actions">
-        <button onClick={() => onEdit(id)} className="edit-btn" aria-label={`Edit ${title}`}>
+        <button onClick={() => onEdit(bookmark)} className="edit-btn" aria-label={`Edit ${title}`}>
           Edit
         </button>
-        <button onClick={() => onDelete(id)} className="delete-btn" aria-label={`Delete ${title}`}>
+        <button onClick={handleDeleteClick} className="delete-btn" aria-label={`Delete ${title}`}>
           Delete
         </button>
       </div>
