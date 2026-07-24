@@ -12,7 +12,7 @@ export default function Settings({ theme, onThemeChange }: SettingsProps) {
         <div className="settings">
             <h3 className="settings-heading">Settings</h3>
             <div className="settings-row">
-                <span>Theme</span>
+                <span className="setting-title">Theme</span>
                 <div className="settings-toogle">
                     <button onClick={() => onThemeChange("dark")} className={`settings-toogle-btn ${theme === "dark" ? "settings-toogle-btn-active" : ""}`}>
                         <Moon size={14} /> Dark
