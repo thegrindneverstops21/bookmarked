@@ -21,28 +21,23 @@ body {
   color: var(--text);
 }
 
-/* Navbar Styling */
-.navbar {
-  height: 64px;
-  width: 100%;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-}
 
-.navbar-brand {
+/* Sidebar Styling */
+.sidebar {
+  width: 220px;
+  background-color: var(--bg);
+  border-right: 1px solid var(--border);
+  padding: 24px 12px;
+  overflow-y: auto;
+}
+.sidebar-brand {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-family: var(--font-sans);
 }
 
-.navbar-logo {
+.sidebar-logo {
   height: 32px;
   width: 32px;
   border-radius: var(--radius-sm);
@@ -54,87 +49,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-.navbar-title {
-  font-weight: 600;
-  font-size: 18px;
-  letter-spacing: -0.01em;
-  font-family: var(--font-sans);
-}
-
-.navbar-search {
-  flex: 1;
-  max-width: 400px;
-  margin: 0 32px;
-  position: relative;
-}
-
-.navbar-search-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-muted);
-}
-
-.navbar-search-input {
-  width: 100%;
-  background: var(--bg-elevated);
-  color: var(--text);
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  padding: 8px 12px 8px 36px;
-  font-size: 12px;
-  outline: none;
-  transition: border-color 0.15s ease;
-  font-family: var(--font-sans);
-}
-
-.navbar-search-input::placeholder {
-  color: var(--text-muted);
-}
-
-.navbar-search-input:focus {
-  border-color: var(--accent);
-}
-
-.navbar-btn-link {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-add-btn {
-  flex-shrink: 0;
-}
-
-.navbar-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--accent);
-  color: white;
-  border: none;
-  border-radius: var(--radius-sm);
-  padding: 8px 14px;
-  font-size: 14px;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.navbar-btn:hover {
-  background: var(--accent-hover);
-}
-
-/* Sidebar Styling */
-.sidebar {
-  width: 220px;
-  background-color: var(--bg);
-  border-right: 1px solid var(--border);
-  padding: 24px 12px;
-  overflow-y: auto;
-}
-
 .sidebar-nav {
   display: flex;
   flex-direction: column;
@@ -241,8 +155,8 @@ body {
   flex-direction: column;
   gap: 8px;
   transition:
-  border-color 0.15s ease,
-  transform 0.1s ease;
+    border-color 0.15s ease,
+    transform 0.1s ease;
 }
 
 .card:hover {
@@ -424,11 +338,53 @@ body {
   font-weight: 500;
   font-family: var(--font-sans);
   cursor: pointer;
-  
 }
 
 .view-header-add-btn:hover {
   background: var(--accent-hover);
+}
+
+.header-search {
+  flex: 1;
+  max-width: 400px;
+  margin: 0 32px;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.search-input {
+  width: 100%;
+  background: var(--bg-elevated);
+  color: var(--text);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 8px 12px 8px 36px;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.15s ease;
+  font-family: var(--font-sans);
+}
+
+.header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 /* Categories */
@@ -460,8 +416,14 @@ body {
   color: var(--text-muted);
 }
 
+.grid-empty {
+  font-family: var(--font-sans);
+}
+
 /* Layout */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
 }
@@ -476,13 +438,13 @@ html, body, #root {
 .layout-body {
   display: flex;
   flex: 1;
-  min-height: 0; /* required so the child below can scroll instead of growing the page */
+  min-height: 0;
 }
 
 .layout-content {
   flex: 1;
   min-width: 0;
-  overflow-y: auto; /* only this area scrolls now — navbar, sidebar, footer stay put */
+  overflow-y: auto;
 }
 
 /* Form */
@@ -578,20 +540,7 @@ html, body, #root {
   color: white;
 }
 
-/* Light theme override */
-[data-theme="light"] {
-  --bg: #ffffff;
-  --bg-elevated: #f1f3f5;
-  --border: #dee2e6;
-  --text: #212529;
-  --text-muted: #6c757d;
-}
-
-/* ===================================================== */
-/* Responsive                                             */
-/* ===================================================== */
-
-/* Tablet: sidebar shrinks to icon-only rail */
+/* Responsive  */
 @media (max-width: 1024px) {
   .sidebar {
     width: 72px;
@@ -604,7 +553,7 @@ html, body, #root {
   }
 
   .sidebar-item span {
-    display: none; /* keep icon, hide label */
+    display: none;
   }
 
   .navbar-search {
@@ -642,7 +591,7 @@ html, body, #root {
   }
 
   .sidebar-item span {
-    display: inline; /* labels come back, stacked under the icon */
+    display: inline;
   }
 
   .navbar {
@@ -656,11 +605,11 @@ html, body, #root {
   }
 
   .navbar-title {
-    display: none; /* logo mark alone is enough at this width */
+    display: none;
   }
 
   .navbar-btn span {
-    display: none; /* icon-only add button */
+    display: none;
   }
 
   .navbar-btn {
@@ -686,7 +635,7 @@ html, body, #root {
   }
 }
 
-/* Small phones: trim padding further, stack view header */
+/* Small phones*/
 @media (max-width: 420px) {
   .navbar {
     height: 56px;

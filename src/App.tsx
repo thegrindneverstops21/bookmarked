@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BookmarkPlus } from "lucide-react";
+import { BookmarkPlus, Search } from "lucide-react";
 import Layout from "./components/Layout";
 import BookmarkGrid from "./components/BookmarkGrid";
 import BookmarkForm from "./components/BookmarkForm";
@@ -65,10 +65,10 @@ export default function App() {
     );
   };
 
-  // wrapper to accept either an updated Bookmark or an id (some components may call onEdit with id)
+  // wrapper to accept either an updated Bookmark or id
   const handleEdit = (payload: string | Bookmark) => {
     if (typeof payload === "string") {
-      // if only id provided, no updated data to apply — noop or could open edit UI
+      // if only id provided, no updated data to apply 
       return;
     }
     handleEditBookmark(payload);
@@ -85,15 +85,6 @@ export default function App() {
     setActiveView(view);
   };
 
-  const handleAddClick = () => {
-    // if we're on categories/settings, jump to bookmarks so the form is visible
-    if (!showGrid) {
-      setCategoryFilter(null);
-      setActiveView("bookmarks");
-    }
-    setShowAddForm((v) => !v);
-  };
-
   // Delete function
   const handleDelete = (idToDelete: string | number) => {
     setBookmarks((prevBookmarks) =>
@@ -103,16 +94,16 @@ export default function App() {
 
   const query = searchQuery.trim().toLowerCase();
 
-const bySearch = bookmarks.filter((b) => {
-  if (!query) return true;
-  return (
-    b.title.toLowerCase().includes(query) ||
-    b.url.toLowerCase().includes(query) ||
-    b.category.toLowerCase().includes(query) ||
-    (b.description?.toLowerCase().includes(query) ?? false) ||
-    b.tags.some((tag) => tag.toLowerCase().includes(query))
-  );
-});
+  const bySearch = bookmarks.filter((b) => {
+    if (!query) return true;
+    return (
+      b.title.toLowerCase().includes(query) ||
+      b.url.toLowerCase().includes(query) ||
+      b.category.toLowerCase().includes(query) ||
+      (b.description?.toLowerCase().includes(query) ?? false) ||
+      b.tags.some((tag) => tag.toLowerCase().includes(query))
+    );
+  });
 
   const visible =
     activeView === "favorites"
@@ -127,8 +118,7 @@ const bySearch = bookmarks.filter((b) => {
     <Layout
       activeView={activeView}
       onNavigate={handleNavigate}
-      onSearch={setSearchQuery}
-      onAddClick={handleAddClick}
+
     >
       {showGrid && (
         <>
@@ -136,6 +126,14 @@ const bySearch = bookmarks.filter((b) => {
             <h2 className="view-header-title">
               {categoryFilter ? categoryFilter : activeView === "favorites" ? "Favorites" : "Dashboard"}
             </h2>
+            <div className="header-search">
+              <Search className='search-icon' size={16} />
+              <input type='text' placeholder='search by title, tag, url, or description' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className='search-input' />
+            </div>
+            <button className="header-btn" onClick={() => setShowAddForm((v) => !v)}>
+              <BookmarkPlus size={16}  />
+              Add Bookmark
+            </button>
           </div>
 
           {showAddForm && <BookmarkForm onAdd={handleAddBookmark} />}
