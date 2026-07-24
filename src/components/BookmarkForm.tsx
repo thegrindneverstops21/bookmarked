@@ -1,16 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Bookmark } from "./BookmarkCard";
 
 interface BookmarkFormProps {
-  onAdd: (bookmark: Bookmark) => void;
+  onSave: (bookmark: Bookmark) => void;
+  onCancel: () => void;
+  editingBookmark?: Bookmark | null;
 }
 
-export default function BookmarkForm({ onAdd }: BookmarkFormProps) {
+export default function BookmarkForm({ onSave, onCancel, editingBookmark }: BookmarkFormProps) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [tagsInput, setTagsInput] = useState("");
+
+  // pre-fill the fields whenever we're handed a bookmark to edit,
+  // and clear them back out when going back to "add" mode
+  useEffect(() => {
+    if (editingBookmark) {
+      setTitle(editingBookmark.title);
+      setUrl(editingBookmark.url);
+      setCategory(editingBookmark.category);
+      setDescription(editingBookmark.description ?? "");
+      setTagsInput(editingBookmark.tags.join(", "));
+    } else {
+      setTitle("");
+      setUrl("");
+      setCategory("");
+      setDescription("");
+      setTagsInput("");
+    }
+  }, [editingBookmark]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,26 +41,20 @@ export default function BookmarkForm({ onAdd }: BookmarkFormProps) {
       .map((t) => t.trim())
       .filter(Boolean);
 
-    onAdd({
-      id: crypto.randomUUID(),
+    onSave({
+      id: editingBookmark ? editingBookmark.id : crypto.randomUUID(),
       title: title.trim(),
       url: url.trim(),
       category: category.trim() || "Uncategorized",
       description: description.trim() || undefined,
       tags,
-      isFavorite: false,
+      isFavorite: editingBookmark ? editingBookmark.isFavorite : false,
     });
-
-    setTitle("");
-    setUrl("");
-    setCategory("");
-    setDescription("");
-    setTagsInput("");
   };
 
   return (
     <form onSubmit={handleSubmit} className="add-form">
-      <h3 className="add-form-heading">Add Bookmark</h3>
+      <h3 className="add-form-heading">{editingBookmark ? "Edit Bookmark" : "Add Bookmark"}</h3>
 
       <input
         type="text"
@@ -80,9 +94,14 @@ export default function BookmarkForm({ onAdd }: BookmarkFormProps) {
         className="add-form-input"
       />
 
-      <button type="submit" className="add-form-submit">
-        Save Bookmark
-      </button>
+      <div className="add-form-actions">
+        <button type="submit" className="add-form-submit">
+          {editingBookmark ? "Save Changes" : "Save Bookmark"}
+        </button>
+        <button type="button" className="add-form-cancel" onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }
