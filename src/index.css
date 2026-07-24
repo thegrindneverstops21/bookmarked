@@ -497,6 +497,32 @@ body,
   background: var(--accent-hover);
 }
 
+.add-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-form-actions .add-form-submit {
+  flex: 1;
+}
+
+.add-form-cancel {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+}
+
+.add-form-cancel:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
 /* Settings */
 .settings {
   padding: 24px;
