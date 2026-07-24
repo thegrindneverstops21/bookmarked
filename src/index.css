@@ -577,6 +577,7 @@ body,
 /* Delete Confirmation */
 .confirm-dialog {
   padding: 24px;
+  background: var(--bg-elevated);
 }
 
 .confirrm-dialog-heading {
