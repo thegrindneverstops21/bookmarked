@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Star, ExternalLink } from "lucide-react";
+import Modal from "./Modal";
 
 export interface Bookmark {
   id: string;
@@ -20,13 +22,7 @@ interface BookmarkCardProps {
 
 export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete, onEdit }: BookmarkCardProps) {
   const { id, title, url, category, description, tags, favicon, isFavorite } = bookmark;
-
-  const handleDeleteClick = () => {
-    const confirmed = window.confirm(`Delete "${title}"? This can't be undone.`);
-    if (confirmed) {
-      onDelete(id);
-    }
-  };
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   return (
     <div className="card">
@@ -63,10 +59,35 @@ export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete, onE
         <button onClick={() => onEdit(bookmark)} className="edit-btn" aria-label={`Edit ${title}`}>
           Edit
         </button>
-        <button onClick={handleDeleteClick} className="delete-btn" aria-label={`Delete ${title}`}>
+        <button onClick={() => setShowDeleteConfirm(true)} className="delete-btn" aria-label={`Delete ${title}`}>
           Delete
         </button>
       </div>
+
+      {showDeleteConfirm && (
+        <Modal onClose={() => setShowDeleteConfirm(false)}>
+          <div className="confirm-dialog">
+            <h3 className="confirm-dialog-heading">Delete bookmark?</h3>
+            <p className="confirm-dialog-text">
+              Are you sure you want to delete <strong>{title}</strong>? This can't be undone.
+            </p>
+            <div className="confirm-dialog-actions">
+              <button className="confirm-dialog-cancel" onClick={() => setShowDeleteConfirm(false)}>
+                Cancel
+              </button>
+              <button
+                className="confirm-dialog-delete"
+                onClick={() => {
+                  onDelete(id);
+                  setShowDeleteConfirm(false);
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
