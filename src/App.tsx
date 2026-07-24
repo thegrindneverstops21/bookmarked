@@ -38,6 +38,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [theme, setTheme] = useState<Theme>(loadTheme);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editingBookmark, setEditingBookmark] = useState<Bookmark | null>(null);
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
 
 
@@ -57,31 +58,39 @@ export default function App() {
     );
   };
 
-  const handleEditBookmark = (updatedBookmark: Bookmark) => {
-    setBookmarks((prev) =>
-      prev.map((bookmark) =>
-        bookmark.id === updatedBookmark.id ? updatedBookmark : bookmark
-      )
-    );
-  };
-
-  // wrapper to accept either an updated Bookmark or id
-  const handleEdit = (payload: string | Bookmark) => {
-    if (typeof payload === "string") {
-      // if only id provided, no updated data to apply 
-      return;
-    }
-    handleEditBookmark(payload);
-  };
-
-  const handleAddBookmark = (bookmark: Bookmark) => {
-    setBookmarks((prev) => [...prev, bookmark]);
+  // handles both add and edit: if the bookmark's id already exists, update it in place;
+  // otherwise append it as new. BookmarkForm always calls this same function.
+  const handleSaveBookmark = (bookmark: Bookmark) => {
+    setBookmarks((prev) => {
+      const exists = prev.some((b) => b.id === bookmark.id);
+      return exists
+        ? prev.map((b) => (b.id === bookmark.id ? bookmark : b))
+        : [...prev, bookmark];
+    });
     setShowAddForm(false);
+    setEditingBookmark(null);
+  };
+
+  // clicking Edit on a card opens the form pre-filled with that bookmark
+  const handleEdit = (bookmark: Bookmark) => {
+    setEditingBookmark(bookmark);
+    setShowAddForm(true);
+  };
+
+  const handleOpenAddForm = () => {
+    setEditingBookmark(null); // make sure we're not accidentally still in edit mode
+    setShowAddForm(true);
+  };
+
+  const handleCancelForm = () => {
+    setShowAddForm(false);
+    setEditingBookmark(null);
   };
 
   const handleNavigate = (view: SidebarView) => {
     setCategoryFilter(null);
     setShowAddForm(false);
+    setEditingBookmark(null);
     setActiveView(view);
   };
 
@@ -114,6 +123,16 @@ export default function App() {
 
   const showGrid = activeView === "dashboard" || activeView === "bookmarks" || activeView === "favorites";
 
+  // empty state copy + whether to show the "add" CTA, per tab —
+  // this is what keeps every tab's empty state consistent but still contextually correct
+  const emptyMessage = categoryFilter
+    ? `No bookmarks in "${categoryFilter}" yet.`
+    : activeView === "favorites"
+      ? "No favorites yet. Star a bookmark to see it here."
+      : "No bookmarks yet. Add your first one!";
+
+  const showEmptyStateButton = activeView !== "favorites";
+
   return (
     <Layout
       activeView={activeView}
@@ -130,20 +149,28 @@ export default function App() {
               <Search className='search-icon' size={16} />
               <input type='text' placeholder='search by title, tag, url, or description' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className='search-input' />
             </div>
-            <button className="header-btn" onClick={() => setShowAddForm((v) => !v)}>
+            <button className="header-btn" onClick={handleOpenAddForm}>
               <BookmarkPlus size={16}  />
               Add Bookmark
             </button>
           </div>
 
-          {showAddForm && <BookmarkForm onAdd={handleAddBookmark} />}
+          {showAddForm && (
+            <BookmarkForm
+              onSave={handleSaveBookmark}
+              onCancel={handleCancelForm}
+              editingBookmark={editingBookmark}
+            />
+          )}
 
           <BookmarkGrid
             bookmarks={visible}
             onToggleFavorite={handleToggleFavorite}
             onEdit={handleEdit}
             onDelete={handleDelete}
-            onAddClick={() => setShowAddForm(true)}
+            onAddClick={handleOpenAddForm}
+            emptyMessage={emptyMessage}
+            showAddButton={showEmptyStateButton}
           />
         </>
       )}
@@ -154,6 +181,10 @@ export default function App() {
           onSelectCategory={(cat) => {
             setCategoryFilter(cat);
             setActiveView("bookmarks");
+          }}
+          onAddClick={() => {
+            setActiveView("bookmarks");
+            handleOpenAddForm();
           }}
         />
       )}
