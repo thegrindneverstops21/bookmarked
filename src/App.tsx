@@ -13,9 +13,7 @@ const BOOKMARKS_KEY = "bookmarks-app:bookmarks";
 const THEME_KEY = "bookmarks-app:theme";
 
 const SAMPLE_BOOKMARKS: Bookmark[] = [
-  { id: "1", title: "React Docs", url: "https://react.dev", category: "Docs", tags: ["dev"], isFavorite: true },
-  { id: "2", title: "MDN Web Docs", url: "https://developer.mozilla.org", category: "Docs", tags: ["dev"], isFavorite: false },
-  { id: "3", title: "GitHub", url: "https://github.com", category: "Dev Tools", tags: ["dev"], isFavorite: false },
+ 
 ];
 
 
@@ -34,7 +32,7 @@ function loadTheme(): Theme {
 }
 
 export default function App() {
-  const [activeView, setActiveView] = useState<SidebarView>("dashboard");
+  const [activeView, setActiveView] = useState<SidebarView>("bookmarks");
   const [bookmarks, setBookmarks] = useState<Bookmark[]>(loadBookmarks);
   const [searchQuery, setSearchQuery] = useState("");
   const [theme, setTheme] = useState<Theme>(loadTheme);
@@ -122,9 +120,9 @@ export default function App() {
         ? bySearch.filter((b) => b.category === categoryFilter)
         : bySearch;
 
-  const showGrid = activeView === "dashboard" || activeView === "bookmarks" || activeView === "favorites";
+  const showGrid = activeView === "bookmarks" || activeView === "favorites";
 
-  // empty state copy + whether to show the "add" CTA, per tab —
+  // empty state copy + whether to show the "add" CTA, per tab
   // this is what keeps every tab's empty state consistent but still contextually correct
   const emptyMessage = categoryFilter
     ? `No bookmarks in "${categoryFilter}" yet.`

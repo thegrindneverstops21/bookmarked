@@ -16,27 +16,28 @@ export default function Categories({ bookmarks, onSelectCategory, onAddClick }: 
 
     const categories = Object.entries(count);
 
-    if (categories.length === 0) {
-        return (
-            <div className="empty-grid-state">
-                <h3 className="category-heading">Categories</h3>
-                <img src={ImageIllustration} alt="No categories yet" className="grid-state" />
-                <button className="empty-state-btn" onClick={onAddClick}>
-                    <BookmarkPlus size={16} /> Add your first bookmark
-                </button>
-                <h3 className="empty-state">No categories yet. Add a bookmark to create one.</h3>
-            </div>
-        );
-    }
+    return (
+        <div className="categories-container">
+            <h2 className="category-heading">Categories</h2>
 
-    return(
-        <div className="categories">
-            {categories.map(([name, count]) => (
-                <button key={name} onClick={() => onSelectCategory(name)} className="categories-item">
-                    <span className="categories-name">{name}</span>
-                    <span className="categories-count">{count}</span>
-                </button>
-            ))}
+            {categories.length === 0 ? (
+                <div className="empty-grid-state">
+                    <img src={ImageIllustration} alt="No categories yet" className="grid-state" />
+                    <button className="empty-state-btn" onClick={onAddClick}>
+                        <BookmarkPlus size={16} /> Add your first bookmark
+                    </button>
+                    <p className="empty-state">No categories yet. Add a bookmark to create one.</p>
+                </div>
+            ) : (
+                <div className="categories">
+                    {categories.map(([name, count]) => (
+                        <button key={name} onClick={() => onSelectCategory(name)} className="categories-item">
+                            <span className="categories-name">{name}</span>
+                            <span className="categories-count">{count}</span>
+                        </button>
+                    ))}
+                </div>
+            )}
         </div>
-    )
+    );
 }

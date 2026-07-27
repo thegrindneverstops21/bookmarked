@@ -55,7 +55,7 @@ export default function BookmarkForm({ onSave, onCancel, editingBookmark }: Book
   return (
     <form onSubmit={handleSubmit} className="add-form">
       <h3 className="add-form-heading">{editingBookmark ? "Edit Bookmark" : "Add Bookmark"}</h3>
-
+      <label className="add-form-label">Title</label>
       <input
         type="text"
         placeholder="Title"
@@ -64,14 +64,16 @@ export default function BookmarkForm({ onSave, onCancel, editingBookmark }: Book
         className="add-form-input"
         required
       />
+      <label className="add-form-label">URL</label>
       <input
         type="url"
-        placeholder="https://example.com"
+        placeholder="https://github.com"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
         className="add-form-input"
         required
       />
+      <label className="add-form-label">Category</label>
       <input
         type="text"
         placeholder="Category (optional)"
@@ -79,6 +81,7 @@ export default function BookmarkForm({ onSave, onCancel, editingBookmark }: Book
         onChange={(e) => setCategory(e.target.value)}
         className="add-form-input"
       />
+      <label className="add-form-label">Description</label>
       <textarea
         placeholder="Description (optional)"
         value={description}
@@ -86,6 +89,7 @@ export default function BookmarkForm({ onSave, onCancel, editingBookmark }: Book
         className="add-form-input add-form-textarea"
         rows={2}
       />
+      <label className="add-form-label">Tags</label>
       <input
         type="text"
         placeholder="Tags, comma separated (optional)"
