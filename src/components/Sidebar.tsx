@@ -1,6 +1,6 @@
 import { LayoutDashboard, Bookmark, Star, FolderKanban, Settings } from "lucide-react";
 
-export type SidebarView = "dashboard" | "bookmarks" | "favorites" | "categories" | "settings";
+export type SidebarView =  "bookmarks" | "favorites" | "categories" | "settings";
 
 interface SidebarProps {
   activeView: SidebarView;
@@ -8,7 +8,6 @@ interface SidebarProps {
 }
 
 const NAV_ITEMS: { id: SidebarView; label: string; icon: typeof LayoutDashboard }[] = [
-  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "bookmarks", label: "Bookmarks", icon: Bookmark },
   { id: "favorites", label: "Favorites", icon: Star },
   { id: "categories", label: "Categories", icon: FolderKanban },
