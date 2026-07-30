@@ -1,79 +1,83 @@
-
-# bookmarked
-=======
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# 📚 Bookmarked!!
+<img src="https://socialify.git.ci/thegrindneverstops21/bookmarked/image?language=1&name=1&owner=1&theme=Light" alt="bookmarked" width="640" height="320" />
+A modern, single-page bookmark manager: save, tag, categorize, and search your links from one clean dashboard instead of a messy browser bookmarks bar.
 
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+<img width="1917" height="918" alt="image" src="https//g:ithub.com/user-attachments/assets/1e3aded9-af91-4dc9-a766-c431ee62a5e3" />
+**Live demo:** (https://bookmarked-alpha.vercel.app/)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Built solo by [Sam Junior Ndlovu](https://github.com/thegrindneverstops21) as part of the CodeTribe 2026–2027 Work-Integrated Learning cohort.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
+## Features
+
+- **Add, edit & delete bookmarks**: full CRUD, with a confirmation modal before anything is deleted
+- **Favorites**: star the bookmarks you use most and filter down to just those
+- **Categories**: bookmarks auto-group by category, with a dedicated Categories view
+- **Powerful search**: filters live across title, URL, category, description, and tags
+- **Dark / light theme**: toggle from Settings, saved across visits
+- **Persistent storage**: everything survives a refresh via `localStorage`, no backend required
+- **Fully responsive**: sidebar collapses to icons on tablet, then to a horizontal tab strip on mobile
+- **Single-page layout**: navbar-free by design; navigation, search, and content all live in one scroll-free shell
+
+## Tech Stack
+
+| | |
+|---|---|
+| **React 19** | Component-driven UI |
+| **TypeScript** | Catches bugs before runtime |
+| **Vite** | Fast dev server & build |
+| **Plain CSS (BEM)** | No UI framework — hand-written, class-based styling |
+| **lucide-react** | Icon set |
+| **Vercel** | Live deployment |
+
+## Getting Started
+
+Clone the repo and install dependencies:
+
+```bash
+git clone https://github.com/thegrindneverstops21/bookmarked.git
+cd bookmarked
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Run the dev server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Other scripts:
+
+```bash
+npm run build     # type-check + production build
+npm run preview   # preview the production build locally
+npm run lint      # run ESLint
+```
+
+## Project Structure
 
 ```
->>>>>>> f1e6ea4 (initial commit & setup navbar)
+src/
+├── App.tsx                 # all app state lives here (bookmarks, theme, active view, search)
+├── index.css               # global stylesheet: design tokens + every component's styles
+├── components/
+│   ├── Layout.tsx           # Sidebar + page content + Footer shell
+│   ├── Sidebar.tsx           # navigation: Dashboard, Bookmarks, Favorites, Categories, Settings
+│   ├── BookmarkGrid.tsx      # renders the card grid, or an empty state when there's nothing to show
+│   ├── BookmarkCard.tsx      # a single bookmark, with favorite/edit/delete actions
+│   ├── BookmarkForm.tsx      # add & edit form (shared between both modes)
+│   ├── Modal.tsx             # reusable overlay (React Portal): powers Add/Edit and Delete confirm
+│   ├── Categories.tsx        # bookmarks grouped and counted by category
+│   ├── Settings.tsx          # theme toggle
+│   └── Footer.tsx
+```
+
+**How state flows:** every component under `Layout` is intentionally "dumb" — it receives data and callbacks as props and has no state of its own. `App.tsx` is the single source of truth, and two `useEffect` hooks keep `bookmarks` and `theme` synced to `localStorage` whenever they change.
+
+## Roadmap
+
+- [ ] Backend + auth (Supabase) for multi-device sync
+- [ ] Drag-and-drop reordering within categories
+- [ ] Browser extension for one-click saving
