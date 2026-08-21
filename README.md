@@ -2,8 +2,10 @@
 <img src="https://socialify.git.ci/thegrindneverstops21/bookmarked/image?language=1&name=1&owner=1&theme=Light" alt="bookmarked" width="640" height="320" />
 A modern, single-page bookmark manager: save, tag, categorize, and search your links from one clean dashboard instead of a messy browser bookmarks bar.
 
+<img width="1912" height="914" alt="image" src="https://github.com/user-attachments/assets/8b3258b1-73c0-4b0f-bdd5-b7632402b5d5" />
+<img width="1920" height="916" alt="image" src="https://github.com/user-attachments/assets/39acec5c-08d7-4d61-94d6-c76d158b4a0c" />
 
-<img width="1917" height="918" alt="image" src="https//g:ithub.com/user-attachments/assets/1e3aded9-af91-4dc9-a766-c431ee62a5e3" />
+<img width="1920" height="918" alt="image" src="https://github.com/user-attachments/assets/0569bed2-764c-4cfc-b376-4b5b11f5adcc" />
 **Live demo:** (https://bookmarked-alpha.vercel.app/)
 
 Built solo by [Sam Junior Ndlovu](https://github.com/thegrindneverstops21) as part of the CodeTribe 2026–2027 Work-Integrated Learning cohort.
