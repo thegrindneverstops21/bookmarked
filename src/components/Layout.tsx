@@ -9,11 +9,13 @@ interface LayoutProp {
     children: ReactNode;
 }
 
+// Layout component that wraps the main content with a sidebar and footer
 export default function Layout({
     activeView,
     onNavigate,
     children,
 }: LayoutProp) {
+
     return(
         <div className="layout">
             <div className="layout-body">
