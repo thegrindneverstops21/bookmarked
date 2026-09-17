@@ -16,7 +16,7 @@ const SAMPLE_BOOKMARKS: Bookmark[] = [
  
 ];
 
-
+// Load bookmarks from localStorage, or return sample bookmarks if none exist
 function loadBookmarks(): Bookmark[] {
   try {
     const raw = localStorage.getItem(BOOKMARKS_KEY);
@@ -26,6 +26,7 @@ function loadBookmarks(): Bookmark[] {
   }
 }
 
+// Load theme from localStorage, defaulting to dark if none is set
 function loadTheme(): Theme {
   const raw = localStorage.getItem(THEME_KEY);
   return raw === "light" ? "light" : "dark";
@@ -40,13 +41,13 @@ export default function App() {
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | null>(null);
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
 
-
+// persist theme whenever it changes
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem(THEME_KEY, theme);
   }, [theme]);
 
-
+// persist bookmarks whenever they change
   useEffect(() => {
     localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
   }, [bookmarks]);
@@ -76,16 +77,19 @@ export default function App() {
     setShowAddForm(true);
   };
 
+  // clicking "Add Bookmark" opens the form in blank state
   const handleOpenAddForm = () => {
     setEditingBookmark(null); // make sure we're not accidentally still in edit mode
     setShowAddForm(true);
   };
 
+  // clicking "Cancel" in the form closes it and clears any editing state
   const handleCancelForm = () => {
     setShowAddForm(false);
     setEditingBookmark(null);
   };
 
+  // clicking a sidebar item resets the category filter and closes the add form
   const handleNavigate = (view: SidebarView) => {
     setCategoryFilter(null);
     setShowAddForm(false);
@@ -102,6 +106,7 @@ export default function App() {
 
   const query = searchQuery.trim().toLowerCase();
 
+  // Filter bookmarks based on search query
   const bySearch = bookmarks.filter((b) => {
     if (!query) return true;
     return (
@@ -113,6 +118,7 @@ export default function App() {
     );
   });
 
+  // Determine which bookmarks to show based on active view and category filter
   const visible =
     activeView === "favorites"
       ? bySearch.filter((b) => b.isFavorite)
