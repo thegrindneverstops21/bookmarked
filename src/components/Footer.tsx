@@ -1,6 +1,7 @@
 import { Copyright } from "lucide-react";
 
 export default function Footer() {
+    //Footer  to show current year instead of hardcoding the current year
     const year = new Date().getFullYear();
 
     return (

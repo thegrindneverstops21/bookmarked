@@ -430,6 +430,10 @@ body {
   gap: 12px;
 }
 
+.empty-state {
+  font-family: var(--font-sans);
+}
+
 /* Layout */
 html,
 body,

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import type { Bookmark } from "./BookmarkCard";
 
+/* User action */
 interface BookmarkFormProps {
   onSave: (bookmark: Bookmark) => void;
   onCancel: () => void;
   editingBookmark?: Bookmark | null;
 }
-
+// Component structure and empty state
 export default function BookmarkForm({ onSave, onCancel, editingBookmark }: BookmarkFormProps) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -31,16 +32,18 @@ export default function BookmarkForm({ onSave, onCancel, editingBookmark }: Book
       setTagsInput("");
     }
   }, [editingBookmark]);
-
+  // Run when form is submitted
+  // Ensures title & and url are filled
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !url.trim()) return;
-
+    //Splits and trims tag if validation is true
     const tags = tagsInput
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean);
-
+    // Preserves the bookmark id if it is being edited 
+    //Generates new id if bookmark is new
     onSave({
       id: editingBookmark ? editingBookmark.id : crypto.randomUUID(),
       title: title.trim(),
@@ -54,6 +57,7 @@ export default function BookmarkForm({ onSave, onCancel, editingBookmark }: Book
 
   return (
     <form onSubmit={handleSubmit} className="add-form">
+      {/* Render form heading depending whether user is adding or editing a bookmark */ }
       <h3 className="add-form-heading">{editingBookmark ? "Edit Bookmark" : "Add Bookmark"}</h3>
       <label className="add-form-label">Title</label>
       <input
@@ -97,7 +101,7 @@ export default function BookmarkForm({ onSave, onCancel, editingBookmark }: Book
         onChange={(e) => setTagsInput(e.target.value)}
         className="add-form-input"
       />
-
+  {/* Form button change dynamically depending on whether user is editing or creating a new bookmark */ }
       <div className="add-form-actions">
         <button type="submit" className="add-form-submit">
           {editingBookmark ? "Save Changes" : "Save Bookmark"}
