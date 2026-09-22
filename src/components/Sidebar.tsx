@@ -7,6 +7,7 @@ interface SidebarProps {
   onNavigate: (view: SidebarView) => void;
 }
 
+{/* Array that stores data for each sidebar item */}
 const NAV_ITEMS: { id: SidebarView; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "bookmarks", label: "Bookmarks", icon: Bookmark },
   { id: "favorites", label: "Favorites", icon: Star },
@@ -16,12 +17,13 @@ const NAV_ITEMS: { id: SidebarView; label: string; icon: typeof LayoutDashboard 
 
 export default function Sidebar({ activeView, onNavigate }: SidebarProps) {
   return (
+     /* Logo and brand name */
     <aside className="sidebar">
       <div className="sidebar-brand">
         <div className="sidebar-logo">B</div>
         <div className="sidebar-brand-title">Bookmarked</div>
       </div>
-      
+     { /* Render navigation bar */}
       <nav className="sidebar-nav">
         {NAV_ITEMS.map(({ id, label, icon: Icon }) => (
           <button

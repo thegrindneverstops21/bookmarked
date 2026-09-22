@@ -12,6 +12,7 @@ interface BookmarkGridProps {
   showAddButton?: boolean;
 }
 
+// Renders a grid of bookmarks or an empty state if there are no bookmarks
 export default function BookmarkGrid({
   bookmarks,
   onToggleFavorite,

@@ -12,6 +12,7 @@ export interface Bookmark {
   favicon?: string;
   isFavorite: boolean;
 }
+
 /*Check user action */
 interface BookmarkCardProps {
   bookmark: Bookmark;
@@ -21,11 +22,14 @@ interface BookmarkCardProps {
 }
 
 export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete, onEdit }: BookmarkCardProps) {
+  {/* Destructuring to easy access values */}
   const { id, title, url, category, description, tags, favicon, isFavorite } = bookmark;
+  {/* Track if user clicks delete to show confirmation modal */}
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   return (
     <div className="card">
+      {/* fill star icon if true */}
       <div className="card-header">
         {favicon ? (
           <img src={favicon} alt="" className="card-favicon" />
@@ -39,9 +43,10 @@ export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete, onE
           <Star size={16} fill={isFavorite ? "currentColor" : "none"} />
         </button>
       </div>
+
       <h3 className="card-title">{title}</h3>
       <span className="card-category">{category}</span>
-
+      {/*Conditional rendering(description/tags should only appear when they exist) */}
       {description && <p className="card-description">{description}</p>}
 
       {tags.length > 0 && (
@@ -63,7 +68,7 @@ export default function BookmarkCard({ bookmark, onToggleFavorite, onDelete, onE
           Delete
         </button>
       </div>
-
+      {/* render confirmation modal if user clicks delete */}
       {showDeleteConfirm && (
         <Modal onClose={() => setShowDeleteConfirm(false)}>
           <div className="confirm-dialog">
