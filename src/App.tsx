@@ -16,7 +16,7 @@ const SAMPLE_BOOKMARKS: Bookmark[] = [
  
 ];
 
-// Load bookmarks from localStorage, or return sample bookmarks if none exist
+// Load bookmarks from localStorage, or return an empty array if none exist
 function loadBookmarks(): Bookmark[] {
   try {
     const raw = localStorage.getItem(BOOKMARKS_KEY);
